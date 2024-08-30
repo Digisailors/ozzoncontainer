@@ -1,6 +1,8 @@
 {
   "hosting": {
     "public": "public",
+    "site": "ozzoncontainer",
+    "cleanUrls": "true",
     "ignore": [
       "firebase.json",
       "**/.*",
