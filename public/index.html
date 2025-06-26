@@ -30,8 +30,8 @@
     <meta property="og:description" content="Shipping Container Homes, Farm House, Best Container Home in Tuticorin, Plots, Temporary House, Resorts, Rooms, Mobile homes, Farmland" />
     <meta property="og:image" content="/content/img/34.jpg" /> -->
     <!-- Favicons -->
-    <link href="content/img/favicon.ico" rel="icon">
-    <link href="content/img/favicon.ico" rel="apple-touch-icon">
+    <link href="content/img/ozzon logo-02.png" rel="icon">
+    <link href="content/img/ozzon logo-02.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700"
@@ -55,6 +55,100 @@
     <link href="content/css/style.css" rel="stylesheet">
 
     <script src="https://kit.fontawesome.com/a28ba29146.js" crossorigin="anonymous"></script>
+
+    <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    .wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      min-height: 100vh;
+    }
+
+    .image-side {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .image-side img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .form-side {
+      flex: 1;
+      background: #fff;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .form-container {
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    label {
+      font-weight: bold;
+      margin-top: 15px;
+      display: block;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      background-color: #007BFF;
+      color: #fff;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .thank-you {
+      display: none;
+      text-align: center;
+      background-color: #d4edda;
+      color: #155724;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 5px;
+    }
+
+    @media (max-width: 768px) {
+      .wrapper {
+        flex-direction: column;
+      }
+      .image-side img {
+        height: 250px;
+      }
+    }
+  </style>
 </head>
 
 
@@ -1027,7 +1121,46 @@
         </main>
         <br>
 
+        <div class="wrapper">
+            <div class="image-side">
+              <img src="content/img/50.JPG" alt="Request Image">
+            </div>
+        
+            <div class="form-side">
+              <form class="form-container" action="https://formsubmit.co/sales@ozzon.in" method="POST" enctype="multipart/form-data">
+                <h2>Request For a Call</h2>
+        
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_next" value="https://yourdomain.com/thank-you.html">
+        
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
+        
+                <label for="mobile">Mobile Number</label>
+                <input type="tel" id="mobile" name="mobile" pattern="[0-9]{10}" required>
+        
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+        
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" required>
+        
+                <label for="description">Description</label>
+                <textarea id="description" name="description" rows="5" required></textarea>
+        
+                <label for="file">Upload File</label>
+                <input type="file" id="file" name="attachment">
+        
+                <button type="submit">Submit Request</button>
+              </form>
 
+        <div class="thank-you" id="thankYouMessage">
+            Thank you! Your form has been submitted.<br />
+            You’ll be redirected shortly...
+        </div>
+            </div>
+          </div>
+          <br>
         <!-- <div class="section-header">
     <h3>Our Channel</h3>
     <div class="responsive-video">
@@ -1322,6 +1455,42 @@
                 });
         })()
     </script> -->
+
+    <script>
+        document.getElementById('requestForm').addEventListener('submit', function (e) {
+          e.preventDefault(); // prevent default form submission
+      
+          const form = this;
+          const fileInput = document.getElementById('file');
+          const errorMsg = document.getElementById('error-message');
+          const file = fileInput.files[0];
+      
+          // File size validation
+          if (file && file.size > 20 * 1024 * 1024) {
+            errorMsg.textContent = "File size must be less than 20MB.";
+            return;
+          }
+      
+          errorMsg.textContent = ''; // Clear error
+      
+          // Submit form using fetch
+          fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form)
+          }).then(() => {
+            form.reset(); // ✅ Clear all fields
+            form.style.display = 'none'; // Hide form
+            document.getElementById('thankYouMessage').style.display = 'block';
+      
+            setTimeout(() => {
+              window.location.reload(); // Reload the form
+            }, 4000);
+          }).catch(() => {
+            alert("There was a problem submitting the form. Please try again.");
+          });
+        });
+      </script>
+
     </body>
 
 </html>
